@@ -1,337 +1,362 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>企业所得税汇算清缴自检 — 宇守信咨询</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f0f2f5; color:#2d3436; padding-bottom:60px; }
-.header { background:linear-gradient(135deg,#0c1445,#1a3a6b); color:white; padding:32px 20px 24px; text-align:center; }
-.header h1 { font-size:22px; font-weight:700; margin-bottom:6px; }
-.header p { font-size:13px; opacity:0.85; }
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     6|<title>企业所得税汇算清缴自检 — 宇守信咨询</title>
+    <!-- 🏷️ 版本 V2.0 — 2026-05-21 -->
+     7|<style>
+     8|* { margin:0; padding:0; box-sizing:border-box; }
+     9|body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:linear-gradient(180deg,#f1f5f9 0%,#cbd5e1 60%,#f8fafc 100%); color:#2d3436; padding-bottom:100px; }
+    10|.header { background:linear-gradient(135deg,#334155,#475569); color:white; padding:32px 20px 24px; text-align:center; }
+    11|.header h1 { font-size:22px; font-weight:700; margin-bottom:6px; }
+    12|.header p { font-size:13px; opacity:0.85; }
+    13|.header .v3-badge { display:inline-block; background:rgba(255,255,255,0.25); border:1px solid rgba(255,255,255,0.4); border-radius:4px; padding:2px 8px; font-size:10px; font-weight:700; margin-left:6px; vertical-align:middle; letter-spacing:1px; }
 .header .badge { display:inline-block; background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 14px; font-size:11px; margin-top:8px; }
-.tabs { display:flex; background:white; box-shadow:0 1px 4px rgba(0,0,0,0.08); position:sticky; top:0; z-index:10; }
-.tab { flex:1; text-align:center; padding:14px 0; font-size:14px; font-weight:500; color:#888; cursor:pointer; border-bottom:3px solid transparent; transition:all .2s; }
-.tab.active { color:#1e3a6f; border-bottom-color:#1e3a6f; }
-.panel { display:none; padding:16px; }
-.panel.active { display:block; }
-.card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:12px; }
-.card-title { background:#f0f4ff; padding:10px 16px; font-size:13px; font-weight:600; color:#1e3a6f; border-bottom:1px solid #e0e7ff; }
-.form-row { padding:10px 16px; border-bottom:1px solid #f5f5f5; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.form-row label { font-size:13px; color:#444; min-width:150px; flex-shrink:0; }
-.form-row input,.form-row select { padding:8px 12px; border:1px solid #e0e0e0; border-radius:8px; font-size:13px; flex:1; min-width:80px; max-width:200px; background:#fff8e1; line-height:44px; height:44px; }
-.form-row input:focus,.form-row select:focus { outline:none; border-color:#3b82f6; }
-.form-row .unit { font-size:12px; color:#888; }
-.yesno { display:flex; gap:8px; }
-.yesno span { padding:4px 16px; border-radius:16px; font-size:13px; cursor:pointer; border:1px solid #ddd; color:#666; }
-.yesno span.sel-yes { background:linear-gradient(135deg,#0c1445,#1a3a6b); color:white; border-color:#3b82f6; }
-.yesno span.sel-no { background:#e8ecf1; color:#999; border-color:#ddd; }
-.fixed-bottom { position:sticky; bottom:0; background:white; padding:12px 16px; display:flex; gap:10px; box-shadow:0 -2px 8px rgba(0,0,0,0.06); z-index:10; }
-.fixed-bottom button { flex:1; padding:12px; border-radius:10px; font-size:14px; font-weight:600; border:none; cursor:pointer; }
-.btn-primary { background:linear-gradient(135deg,#0c1445,#1a3a6b); color:white; }
-.btn-primary:hover { opacity:0.9; }
-.btn-secondary { background:#e8ecf1; color:#555; }
-
-.score-card { background:linear-gradient(135deg,#0c1445,#1a3a6b); color:white; border-radius:16px; padding:28px 20px; text-align:center; margin-bottom:16px; }
-.score-card .label { font-size:13px; opacity:0.85; }
-.score-card .score { font-size:40px; font-weight:800; margin:6px 0; }
-.score-card .grade { font-size:16px; font-weight:600; margin-bottom:4px; }
-.score-card .suggestion { font-size:13px; opacity:0.9; line-height:1.6; }
-.result-summary { background:linear-gradient(135deg,#0c1445,#1a3a6b); color:white; border-radius:16px; padding:28px 20px; text-align:center; margin-bottom:16px; }
-.result-summary .row { display:flex; justify-content:space-around; margin-top:12px; flex-wrap:wrap; gap:8px; }
-.result-summary .item { flex:1; min-width:100px; }
-.result-summary .item .label { font-size:11px; opacity:0.85; }
-.result-summary .item .val { font-size:22px; font-weight:800; margin:4px 0; }
-.result-summary .item .sub { font-size:12px; opacity:0.85; }
-
-.dim-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
-.dim-card { background:white; border-radius:12px; padding:16px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
-.dim-card .name { font-size:12px; color:#888; margin-bottom:4px; }
-.dim-card .dscore { font-size:20px; font-weight:700; }
-.dim-card .dstatus { font-size:11px; margin-top:4px; padding:2px 10px; border-radius:10px; display:inline-block; }
-.low { background:#e6f7e6; color:#16a34a; }
-.mid { background:#fef9e7; color:#d97706; }
-.high { background:#feeaea; color:#dc2626; }
-.pass { background:#e6f7e6; color:#16a34a; }
-.warn { background:#fef9e7; color:#d97706; }
-.danger { background:#feeaea; color:#dc2626; }
-.fail { background:#feeaea; color:#dc2626; }
-.caution { background:#fef9e7; color:#d97706; }
-.rate-green { background:#e6f7e6; color:#16a34a; }
-.rate-yellow { background:#fef9e7; color:#d97706; }
-.rate-red { background:#feeaea; color:#dc2626; }
-
-.help-card { background:white; border-radius:12px; padding:20px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
-.help-card h3 { font-size:15px; margin-bottom:8px; color:#1e3a6f; }
-.help-card p,.help-card li { font-size:13px; color:#555; line-height:1.8; }
-.check-list { list-style:none; padding:0; }
-.check-list li { padding:6px 0; font-size:13px; color:#444; border-bottom:1px solid #f5f5f5; display:flex; align-items:center; gap:8px; }
-.check-list li:last-child { border-bottom:none; }
-.detail-item { padding:12px 16px; border-bottom:1px solid #f5f5f5; display:flex; justify-content:space-between; align-items:center; }
-.detail-item:last-child { border-bottom:none; }
-.detail-item .dlabel { font-size:13px; color:#555; }
-.detail-item .dval { font-size:14px; font-weight:600; }
-.detail-item .dval.pass { color:#16a34a; }
-.detail-item .dval.warn { color:#d97706; }
-.detail-item .dval.danger { color:#dc2626; }
-.result-card { background:white; border-radius:12px; padding:16px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
-.result-card h3 { font-size:14px; color:#1e3a6f; margin-bottom:8px; }
-.result-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #f5f5f5; font-size:13px; }
-.result-row:last-child { border-bottom:none; }
-.result-row .label { color:#555; }
-.result-row .val { font-weight:600; }
-.result-row.total { border-top:2px solid #1e3a6f; padding-top:8px; margin-top:4px; font-weight:700; }
-.result-row.total .val { color:#1e3a6f; font-size:16px; }
-.result-green { color:#16a34a; }
-.result-red { color:#dc2626; }
-.result-orange { color:#d97706; }
-
-.member-banner { background:linear-gradient(135deg,#0f0c29,#302b63,#24243e); border-radius:12px; padding:20px; text-align:center; margin-top:16px; }
-.member-banner h3 { font-size:15px; color:white; margin-bottom:6px; }
-.member-banner p { font-size:12px; color:rgba(255,255,255,0.85); line-height:1.6; }
-.member-banner .btn { display:inline-block; background:white; color:#1e3a6f; padding:8px 24px; border-radius:20px; text-decoration:none; font-size:13px; font-weight:600; margin-top:8px; }
-
-.contact { background:#eef2ff; border-radius:8px; padding:12px; }
-.contact strong { font-size:14px; color:#1e3a6f; }
-.scenario-grid { display:flex; gap:8px; }
-.scenario-btn { flex:1; padding:10px; border-radius:8px; font-size:13px; font-weight:600; border:2px solid #ddd; background:white; color:#888; cursor:pointer; text-align:center; transition:all .2s; }
-.scenario-btn.active { border-color:#3b82f6; color:#1e3a6f; background:#eef2ff; }
-.chart-area { background:white; border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:16px; text-align:center; }
-.chart-area canvas { max-width:100%; height:auto; }
-.form-row input[type=range] { flex:1; min-width:120px; max-width:250px; accent-color:#3b82f6; }
-.form-row .val { font-size:14px; font-weight:700; color:#1e3a6f; min-width:30px; text-align:right; }
-.form-row .hint { font-size:11px; color:#999; }
-.dim-card .bar-bg { position:absolute; bottom:0; left:0; height:4px; background:#e8ecf1; width:100%; }
-.dim-card .bar-fill { position:absolute; bottom:0; left:0; height:4px; transition:width .5s; }
-
-@media (max-width:480px){.dim-grid{grid-template-columns:1fr 1fr}.result-summary .row{flex-direction:column;gap:4px}}
-
-
-/* ===== 打印/PDF样式 ===== */
-@media print {
-  body { background:white !important; padding:0 !important; margin:0 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .fixed-bottom, .no-print, .marketing, [class*="返回"], footer, .footer, #返回, .return-bar, .bottom-bar { display:none !important; }
-  .header { background:linear-gradient(135deg,#0c1445,#1a3a6b) !important; color:white !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; padding:20px 16px !important; }
-  .card, .dim-card, .check-item, .result-card { break-inside:avoid; page-break-inside:avoid; border:1px solid #ddd !important; box-shadow:none !important; }
-  .score-card, .result-summary { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .tabs { display:none !important; }
-  .panel { display:block !important; padding:10px !important; }
-  .dim-grid { display:grid !important; grid-template-columns:1fr 1fr !important; gap:8px !important; }
-  .form-row { padding:6px 10px !important; }
-  a[href]:after { content:none !important; }
-}
-
-.pdf-btn { background:linear-gradient(135deg,#b8860b,#d4a843) !important; }
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>📈 企业所得税汇算清缴自检</h1>
-  <p>收入确认 · 税前扣除 · 优惠适用 · 纳税调整</p>
-  <div class="badge">您身边的财税专家 · 洪淳宇</div>
+    14|.tabs { display:flex; background:white; box-shadow:0 1px 4px rgba(0,0,0,0.08); position:sticky; top:0; z-index:10; }
+    15|.tab { flex:1; text-align:center; padding:14px 0; font-size:14px; font-weight:500; color:#888; cursor:pointer; border-bottom:3px solid transparent; transition:all .2s; }
+    16|.tab.active { color:#334155; border-bottom-color:#334155; }
+    17|.panel { display:none; padding:16px; }
+    18|.panel.active { display:block; }
+    19|.card { background:white; border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:12px; }
+    20|.card-title { background:#f1f5f9; padding:10px 16px; font-size:13px; font-weight:600; color:#334155; border-bottom:1px solid #cbd5e1; }
+    21|.form-row { padding:10px 16px; border-bottom:1px solid #f5f5f5; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    22|.form-row label { font-size:13px; color:#444; min-width:150px; flex-shrink:0; }
+    23|.form-row input,.form-row select { padding:8px 12px; border:1px solid #e0e0e0; border-radius:8px; font-size:13px; flex:1; min-width:80px; max-width:200px; background:#fff8e1; line-height:44px; height:44px; }
+    24|.form-row input:focus,.form-row select:focus { outline:none; border-color:#64748b; }
+    25|.form-row .unit { font-size:12px; color:#888; }
+    26|.yesno { display:flex; gap:8px; }
+    27|.yesno span { padding:4px 16px; border-radius:16px; font-size:13px; cursor:pointer; border:1px solid #ddd; color:#666; }
+    28|.yesno span.sel-yes { background:linear-gradient(135deg,#334155,#475569); color:white; border-color:#64748b; }
+    29|.yesno span.sel-no { background:#e8ecf1; color:#999; border-color:#ddd; }
+    30|.fixed-bottom { position:sticky; bottom:0; background:white; padding:12px 16px; display:flex; gap:10px; box-shadow:0 -2px 8px rgba(0,0,0,0.06); z-index:10; }
+    31|.fixed-bottom button { flex:1; padding:12px; border-radius:10px; font-size:14px; font-weight:600; border:none; cursor:pointer; }
+    32|.btn-primary { background:linear-gradient(135deg,#334155,#475569); color:white; }
+    33|.btn-primary:hover { opacity:0.9; }
+    34|.btn-secondary { background:#e8ecf1; color:#555; }
+    35|
+    36|.score-card { background:linear-gradient(135deg,#334155,#475569); color:white; border-radius:16px; padding:28px 20px; text-align:center; margin-bottom:16px; }
+    37|.score-card .label { font-size:13px; opacity:0.85; }
+    38|.score-card .score { font-size:40px; font-weight:800; margin:6px 0; }
+    39|.score-card .grade { font-size:16px; font-weight:600; margin-bottom:4px; }
+    40|.score-card .suggestion { font-size:13px; opacity:0.9; line-height:1.6; }
+    41|.result-summary { background:linear-gradient(135deg,#334155,#475569); color:white; border-radius:16px; padding:28px 20px; text-align:center; margin-bottom:16px; }
+    42|.result-summary .row { display:flex; justify-content:space-around; margin-top:12px; flex-wrap:wrap; gap:8px; }
+    43|.result-summary .item { flex:1; min-width:100px; }
+    44|.result-summary .item .label { font-size:11px; opacity:0.85; }
+    45|.result-summary .item .val { font-size:22px; font-weight:800; margin:4px 0; }
+    46|.result-summary .item .sub { font-size:12px; opacity:0.85; }
+    47|
+    48|.dim-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+    49|.dim-card { background:white; border-radius:12px; padding:16px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
+    50|.dim-card .name { font-size:12px; color:#888; margin-bottom:4px; }
+    51|.dim-card .dscore { font-size:20px; font-weight:700; }
+    52|.dim-card .dstatus { font-size:11px; margin-top:4px; padding:2px 10px; border-radius:10px; display:inline-block; }
+    53|.low { background:#e6f7e6; color:#64748b; }
+    54|.mid { background:#fef9e7; color:#d97706; }
+    55|.high { background:#feeaea; color:#dc2626; }
+    56|.pass { background:#e6f7e6; color:#64748b; }
+    57|.warn { background:#fef9e7; color:#d97706; }
+    58|.danger { background:#feeaea; color:#dc2626; }
+    59|.fail { background:#feeaea; color:#dc2626; }
+    60|.caution { background:#fef9e7; color:#d97706; }
+    61|.rate-green { background:#e6f7e6; color:#64748b; }
+    62|.rate-yellow { background:#fef9e7; color:#d97706; }
+    63|.rate-red { background:#feeaea; color:#dc2626; }
+    64|
+    65|.help-card { background:white; border-radius:12px; padding:20px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
+    66|.help-card h3 { font-size:15px; margin-bottom:8px; color:#334155; }
+    67|.help-card p,.help-card li { font-size:13px; color:#555; line-height:1.8; }
+    68|.check-list { list-style:none; padding:0; }
+    69|.check-list li { padding:6px 0; font-size:13px; color:#444; border-bottom:1px solid #f5f5f5; display:flex; align-items:center; gap:8px; }
+    70|.check-list li:last-child { border-bottom:none; }
+    71|.detail-item { padding:12px 16px; border-bottom:1px solid #f5f5f5; display:flex; justify-content:space-between; align-items:center; }
+    72|.detail-item:last-child { border-bottom:none; }
+    73|.detail-item .dlabel { font-size:13px; color:#555; }
+    74|.detail-item .dval { font-size:14px; font-weight:600; }
+    75|.detail-item .dval.pass { color:#64748b; }
+    76|.detail-item .dval.warn { color:#d97706; }
+    77|.detail-item .dval.danger { color:#dc2626; }
+    78|.result-card { background:white; border-radius:12px; padding:16px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,0.06); }
+    79|.result-card h3 { font-size:14px; color:#334155; margin-bottom:8px; }
+    80|.result-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #f5f5f5; font-size:13px; }
+    81|.result-row:last-child { border-bottom:none; }
+    82|.result-row .label { color:#555; }
+    83|.result-row .val { font-weight:600; }
+    84|.result-row.total { border-top:2px solid #334155; padding-top:8px; margin-top:4px; font-weight:700; }
+    85|.result-row.total .val { color:#334155; font-size:16px; }
+    86|.result-green { color:#64748b; }
+    87|.result-red { color:#dc2626; }
+    88|.result-orange { color:#d97706; }
+    89|
+    90|.member-banner { background:linear-gradient(135deg,#334155,#475569,#334155); border-radius:12px; padding:20px; text-align:center; margin-top:16px; }
+    91|.member-banner h3 { font-size:15px; color:white; margin-bottom:6px; }
+    92|.member-banner p { font-size:12px; color:rgba(255,255,255,0.85); line-height:1.6; }
+    93|.member-banner .btn { display:inline-block; background:white; color:#334155; padding:8px 24px; border-radius:20px; text-decoration:none; font-size:13px; font-weight:600; margin-top:8px; }
+    94|
+    95|.contact { background:#f8fafc; border-radius:8px; padding:12px; }
+    96|.contact strong { font-size:14px; color:#334155; }
+    97|.scenario-grid { display:flex; gap:8px; }
+    98|.scenario-btn { flex:1; padding:10px; border-radius:8px; font-size:13px; font-weight:600; border:2px solid #ddd; background:white; color:#888; cursor:pointer; text-align:center; transition:all .2s; }
+    99|.scenario-btn.active { border-color:#64748b; color:#334155; background:#f8fafc; }
+   100|.chart-area { background:white; border-radius:16px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.06); margin-bottom:16px; text-align:center; }
+   101|.chart-area canvas { max-width:100%; height:auto; }
+   102|.form-row input[type=range] { flex:1; min-width:120px; max-width:250px; accent-color:#64748b; }
+   103|.form-row .val { font-size:14px; font-weight:700; color:#334155; min-width:30px; text-align:right; }
+   104|.form-row .hint { font-size:11px; color:#999; }
+   105|.dim-card .bar-bg { position:absolute; bottom:0; left:0; height:4px; background:#e8ecf1; width:100%; }
+   106|.dim-card .bar-fill { position:absolute; bottom:0; left:0; height:4px; transition:width .5s; }
+   107|
+   108|@media (max-width:480px){.dim-grid{grid-template-columns:1fr 1fr}.result-summary .row{flex-direction:column;gap:4px}}
+   109|
+   110|
+   111|/* ===== 打印/PDF样式 ===== */
+   112|@media print {
+   113|  body { background:white !important; padding:0 !important; margin:0 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+   114|  .fixed-bottom, .no-print, .marketing, [class*="返回"], footer, .footer, #返回, .return-bar, .bottom-bar { display:none !important; }
+   115|  .header { background:linear-gradient(135deg,#334155,#475569) !important; color:white !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; padding:20px 16px !important; }
+   116|  .card, .dim-card, .check-item, .result-card { break-inside:avoid; page-break-inside:avoid; border:1px solid #ddd !important; box-shadow:none !important; }
+   117|  .score-card, .result-summary { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+   118|  .tabs { display:none !important; }
+   119|  .panel { display:block !important; padding:10px !important; }
+   120|  .dim-grid { display:grid !important; grid-template-columns:1fr 1fr !important; gap:8px !important; }
+   121|  .form-row { padding:6px 10px !important; }
+   122|  a[href]:after { content:none !important; }
+   123|}
+   124|
+   125|.pdf-btn { background:linear-gradient(135deg,#b8860b,#d4a843) !important; }
+   126|</style>
+   127|</head>
+   128|<body>
+   129|<div class="header">
+   130|  <h1>📈 企业所得税汇算清缴自检 <span class="v3-badge">V3.0</span></h1>
+   131|  <p>收入确认 · 税前扣除 · 优惠适用 · 纳税调整</p>
+   132|  <div class="badge">您身边的财税专家 · 洪淳宇</div>
+   133|</div>
+   134|<div class="tabs">
+   135|  <div class="tab active" data-tab="input" onclick="st('input')">📝 填数据</div>
+   136|  <div class="tab" data-tab="report" onclick="st('report')">📊 自检报告</div>
+   137|  <div class="tab" data-tab="help" onclick="st('help')">❓ 说明</div>
+   138|</div>
+   139|
+   140|<div class="panel active" id="p-input">
+   141|  <div class="card">
+   142|    <div class="card-title">🏢 企业基础信息</div>
+   143|    <div class="form-row"><label>企业名称</label><input id="f_企业名称" placeholder="选填"></div>
+   144|    <div class="form-row"><label>企业所得税征收方式</label>
+   145|      <select id="f_征收方式"><option value="查账征收" selected>查账征收</option><option value="核定征收">核定征收</option></select>
+   146|    </div>
+   147|    <div class="form-row"><label>是否适用小型微利企业优惠</label>
+   148|      <select id="f_小微"><option value="是">是</option><option value="否" selected>否</option></select>
+   149|    </div>
+   150|    <div class="form-row"><label>是否高新技术企业</label>
+   151|      <select id="f_高新"><option value="是">是</option><option value="否" selected>否</option></select>
+   152|    </div>
+   153|  </div>
+   154|
+   155|  <div class="card">
+   156|    <div class="card-title">📊 收入确认检查</div>
+   157|    <div class="form-row"><label>营业收入是否全部及时入账</label>
+   158|      <select id="f_收入入账"><option value="0">全部及时入账</option><option value="1" selected>大部入账，部分跨期</option><option value="2">存在跨期/少计收入情况</option></select>
+   159|    </div>
+   160|    <div class="form-row"><label>视同销售收入是否已确认</label>
+   161|      <select id="f_视同销售"><option value="0">已全部确认</option><option value="1" selected>部分已确认</option><option value="2">未确认</option></select>
+   162|    </div>
+   163|    <div class="form-row"><label>不征税收入处理是否正确</label>
+   164|      <select id="f_不征税"><option value="0">正确区分</option><option value="1" selected>基本正确</option><option value="2">不确定</option></select>
+   165|    </div>
+   166|  </div>
+   167|
+   168|  <div class="card">
+   169|    <div class="card-title">💰 税前扣除检查</div>
+   170|    <div class="form-row"><label>业务招待费是否超限额</label>
+   171|      <select id="f_招待费"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额未调整</option></select>
+   172|    </div>
+   173|    <div class="form-row"><label>广告宣传费是否超限额</label>
+   174|      <select id="f_广告费"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额未调整</option></select>
+   175|    </div>
+   176|    <div class="form-row"><label>公益性捐赠是否超限额</label>
+   177|      <select id="f_捐赠"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额</option></select>
+   178|    </div>
+   179|    <div class="form-row"><label>工资薪金与福利费扣除合规</label>
+   180|      <select id="f_工资"><option value="0">完全合规</option><option value="1" selected>基本合规</option><option value="2">存在不合规情况</option></select>
+   181|    </div>
+   182|    <div class="form-row"><label>资产折旧摊销处理正确</label>
+   183|      <select id="f_折旧"><option value="0">正确</option><option value="1" selected>基本正确</option><option value="2">存在问题</option></select>
+   184|    </div>
+   185|  </div>
+   186|
+   187|  <div class="card">
+   188|    <div class="card-title">🎯 优惠适用检查</div>
+   189|    <div class="form-row"><label>研发费用加计扣除是否已享受</label>
+   190|      <select id="f_研发加计"><option value="0">已享受，金额正确</option><option value="1" selected>已享受，金额待确认</option><option value="2">未享受（有研发活动但未申报）</option></select>
+   191|    </div>
+   192|    <div class="form-row"><label>小微企业/高新优惠税率是否正确适用</label>
+   193|      <select id="f_优惠税率"><option value="0">正确适用</option><option value="1" selected>基本适用</option><option value="2">未适用或适用错误</option></select>
+   194|    </div>
+   195|    <div class="form-row"><label>免税收入（国债利息等）是否已申报</label>
+   196|      <select id="f_免税收入"><option value="0">已正确申报</option><option value="1" selected>已申报但金额待核实</option><option value="2">未申报</option></select>
+   197|    </div>
+   198|    <div class="form-row"><label>以前年度亏损是否已弥补</label>
+   199|      <select id="f_亏损弥补"><option value="0">正确弥补</option><option value="1" selected>部分弥补</option><option value="2">未弥补/超期</option></select>
+   200|    </div>
+   201|  </div>
+   202|
+   203|  <div class="card">
+   204|    <div class="card-title">📋 申报合规</div>
+   205|    <div class="form-row"><label>纳税调整项目是否完整</label>
+   206|      <select id="f_纳税调整"><option value="0">完整调整</option><option value="1" selected">大部分已调整</option><option value="2">漏调整</option></select>
+   207|    </div>
+   208|    <div class="form-row"><label>关联交易是否已申报</label>
+   209|      <select id="f_关联交易"><option value="0">已申报，合规</option><option value="1" selected">有关联交易但未申报</option><option value="2">不适用</option></select>
+   210|    </div>
+   211|    <div class="form-row"><label>汇算清缴是否已按期完成</label>
+   212|      <select id="f_按期"><option value="0">已按期完成</option><option value="1" selected">正在进行中</option><option value="2">尚未开始</option></select>
+   213|    </div>
+   214|  </div>
+   215|
+   216|  <div class="fixed-bottom">
+   217|    <button class="btn-secondary" onclick="resetAll()">清空</button>
+   218|    <button class="btn-primary" onclick="calc()">📊 开始自检</button>
+   219|  </div>
+   220|</div>
+   221|
+   222|<div class="panel" id="p-report">
+   223|  <div id="scoreCard" class="score-card">
+   224|    <div class="label">汇算清缴合规评分</div>
+   225|    <div class="score">—</div>
+   226|    <div class="grade">请先在「填数据」页录入</div>
+   227|    <div class="suggestion"></div>
+   228|  </div>
+   229|  <div id="dimGrid" class="dim-grid"></div>
+   230|  <div class="card">
+   231|    <div class="card-title">📋 逐项检查结果</div>
+   232|    <div id="detailItems"></div>
+   233|  </div>
+   234|  <div class="fixed-bottom">
+   235|    <button class="btn-secondary" onclick="st('input')">← 修改数据</button>
+   236|    <button class="btn-primary" onclick="shareResult()">📤 分享</button>
+   237|  </div>
+   238|</div>
+   239|
+   240|<div class="panel" id="p-help">
+   241|  <div class="help-card"><h3>📋 使用说明</h3>
+   242|    <ol><li>填写企业基础信息和汇算情况</li><li>选择各检查项</li><li>查看合规评分及风险提示</li></ol>
+   243|  </div>
+   244|  <div class="help-card"><h3>📊 检查维度</h3>
+   245|    <p><strong>收入确认</strong> — 及时入账、视同销售、不征税收入</p>
+   246|    <p><strong>税前扣除</strong> — 招待费、广告费、捐赠、工资、折旧</p>
+   247|    <p><strong>优惠适用</strong> — 研发加计、小微优惠、免税收入、亏损弥补</p>
+   248|    <p><strong>申报合规</strong> — 纳税调整、关联交易、按期申报</p>
+   249|  </div>
+   250|  <div class="help-card"><h3>⚠️ 常见风险点</h3>
+   251|    <ul>
+   252|      <li>业务招待费超限未调整 → 补税+滞纳金</li>
+   253|      <li>研发费用加计扣除未享受 → 多缴税款</li>
+   254|      <li>关联交易未申报 → 转让定价风险</li>
+   255|      <li>优惠税率适用错误 → 补税风险</li>
+   256|    </ul>
+   257|  </div>
+   258|  <div class="help-card"><h3>👤 关于作者</h3>
+   259|    <div class="contact">
+   260|      <strong>洪淳宇 · 您身边的财税专家</strong>
+   261|      <p>专注企业所得税汇算清缴、税务筹划、合规申报</p>
+   262|      <p style="margin-top:6px;">📞 186-0129-4989 | 💬 hongchunyu042896</p>
+   263|    </div>
+   264|  </div>
+   265|</div>
+   266|
+   267|<script>
+   268|function gs(id){const el=document.getElementById("f_"+id);return el?parseInt(el.value)||0:0}
+   269|function calc(){
+   270|  const items={
+   271|    "收入及时入账":gs("收入入账"),"视同销售确认":gs("视同销售"),"不征税收入处理":gs("不征税"),
+   272|    "业务招待费":gs("招待费"),"广告宣传费":gs("广告费"),"公益性捐赠":gs("捐赠"),
+   273|    "工资福利费":gs("工资"),"折旧摊销":gs("折旧"),
+   274|    "研发加计扣除":gs("研发加计"),"优惠税率":gs("优惠税率"),"免税收入":gs("免税收入"),"亏损弥补":gs("亏损弥补"),
+   275|    "纳税调整":gs("纳税调整"),"关联交易":gs("关联交易"),"按期申报":gs("按期")
+   276|  };
+   277|  const totalScore=Object.values(items).reduce((s,v)=>s+v,0);
+   278|  const maxScore=Object.keys(items).length*2;
+   279|  const rate=Math.round((maxScore-totalScore)/maxScore*100);
+   280|
+   281|  let grade,suggestion;
+   282|  if(rate>=85){grade="🟢 合规状况良好";suggestion="🎉 汇算清缴准备工作充分，建议按期完成申报"}
+   283|  else if(rate>=70){grade="🟡 基本合规";suggestion="📌 部分项目需关注，建议逐项排查纳税调整"}
+   284|  else if(rate>=55){grade="🟠 存在风险";suggestion="⚠️ 汇算清缴存在风险，建议全面梳理纳税调整项"}
+   285|  else{grade="🔴 风险较高";suggestion="🚨 汇算清缴风险较高，强烈建议专业会计师介入"}
+   286|
+   287|  document.getElementById("scoreCard").innerHTML=
+   288|    `<div class="label">汇算清缴合规评分</div><div class="score">${maxScore-totalScore}/${maxScore}</div><div class="grade">${grade}</div><div class="suggestion">${suggestion}</div>`;
+   289|
+   290|  const dims={
+   291|    "收入确认":{s:gs("收入入账")+gs("视同销售")+gs("不征税"),m:6},
+   292|    "税前扣除":{s:gs("招待费")+gs("广告费")+gs("捐赠")+gs("工资")+gs("折旧"),m:10},
+   293|    "优惠适用":{s:gs("研发加计")+gs("优惠税率")+gs("免税收入")+gs("亏损弥补"),m:8},
+   294|    "申报合规":{s:gs("纳税调整")+gs("关联交易")+gs("按期"),m:6}
+   295|  };
+   296|
+   297|  document.getElementById("dimGrid").innerHTML=Object.entries(dims).map(([k,v])=>{
+   298|    const p=Math.round((v.m-v.s)/v.m*100);
+   299|    let c="#64748b",cl="pass";
+   300|    if(p<60){c="#dc2626";cl="danger"}else if(p<80){c="#d97706";cl="warn"}
+   301|    return `<div class="dim-card"><div class="name">${k}</div><div class="dscore" style="color:${c}">${v.m-v.s}/${v.m}</div><div class="dstatus ${cl}">${p}%</div></div>`;
+   302|  }).join("");
+   303|
+   304|  const labels={
+   305|    "收入及时入账":["全部及时","大部入账","存在跨期"],"视同销售确认":["全部确认","部分确认","未确认"],
+   306|    "不征税收入处理":["正确区分","基本正确","不确定"],
+   307|    "业务招待费":["未超限","接近限额","已超限"],"广告宣传费":["未超限","接近限额","已超限"],
+   308|    "公益性捐赠":["未超限","接近限额","已超限"],"工资福利费":["完全合规","基本合规","不合规"],
+   309|    "折旧摊销":["正确","基本正确","存在问题"],
+   310|    "研发加计扣除":["已享受正确","已享受待确认","未享受"],"优惠税率":["正确适用","基本适用","未适用"],
+   311|    "免税收入":["正确申报","待核实","未申报"],"亏损弥补":["正确弥补","部分弥补","未弥补"],
+   312|    "纳税调整":["完整调整","大部调整","漏调整"],"关联交易":["已申报合规","未申报","不适用"],
+   313|    "按期申报":["已按期","进行中","尚未开始"]
+   314|  };
+   315|  const itemKeys=Object.keys(items);
+   316|  document.getElementById("detailItems").innerHTML=itemKeys.map(k=>{
+   317|    const v=items[k];
+   318|    const s=v===0?"✅":v===1?"⚠️":"❌";
+   319|    const c=v===0?"#64748b":v===1?"#d97706":"#dc2626";
+   320|    return `<div style="display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #f0f0f0;font-size:13px;align-items:center">
+   321|      <span>${k}</span><span style="color:#666">${labels[k]?labels[k][v]:''}</span><span style="color:${c};font-weight:600">${s}</span>
+   322|    </div>`;
+   323|  }).join("");
+   324|  st("report");
+   325|}
+   326|function st(n){document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===n));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id==="p-"+n));window.scrollTo(0,0)}
+   327|function resetAll(){if(!confirm("清空数据？"))return;document.querySelectorAll("#p-input select").forEach(e=>e.selectedIndex=0);document.querySelectorAll("#p-input input").forEach(e=>e.value="")}
+   328|function shareResult(){alert("📱 截屏保存即可分享给客户！")}
+   329|
+   330|function downloadPDF(){
+   331|  window.print();
+   332|}
+   333|</script>
+   334|
+   335|
+   336|  </div>
+   337|</div>
+   338|  <div class="back-link"><a href="https://sparrow528.github.io/silver-toolbox/">← 返回银级会员入口</a></div>
+   339|
+<div class="bottom-bar" style="position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(0,0,0,.06);padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;color:#64748b;z-index:100">
+  <span style="font-weight:600;color:#334155">宇守信咨询</span>
+  <span style="color:#94a3b8">|</span>
+  <span>186-0129-4989</span>
+  <span style="color:#94a3b8">|</span>
+  <span>银级 V3.0</span>
 </div>
-<div class="tabs">
-  <div class="tab active" data-tab="input" onclick="st('input')">📝 填数据</div>
-  <div class="tab" data-tab="report" onclick="st('report')">📊 自检报告</div>
-  <div class="tab" data-tab="help" onclick="st('help')">❓ 说明</div>
-</div>
 
-<div class="panel active" id="p-input">
-  <div class="card">
-    <div class="card-title">🏢 企业基础信息</div>
-    <div class="form-row"><label>企业名称</label><input id="f_企业名称" placeholder="选填"></div>
-    <div class="form-row"><label>企业所得税征收方式</label>
-      <select id="f_征收方式"><option value="查账征收" selected>查账征收</option><option value="核定征收">核定征收</option></select>
-    </div>
-    <div class="form-row"><label>是否适用小型微利企业优惠</label>
-      <select id="f_小微"><option value="是">是</option><option value="否" selected>否</option></select>
-    </div>
-    <div class="form-row"><label>是否高新技术企业</label>
-      <select id="f_高新"><option value="是">是</option><option value="否" selected>否</option></select>
-    </div>
+
+  
+
+
+  <div style="text-align:center; padding:16px; margin-top:4px;">
+    <a href="https://sparrow528.github.io/silver-toolbox/" style="display:inline-block; padding:10px 24px; background:#f1f5f9; color:#334155; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none; border:1px solid #cbd5e1;">
+      ← 返回银级会员入口
+    </a>
   </div>
 
-  <div class="card">
-    <div class="card-title">📊 收入确认检查</div>
-    <div class="form-row"><label>营业收入是否全部及时入账</label>
-      <select id="f_收入入账"><option value="0">全部及时入账</option><option value="1" selected>大部入账，部分跨期</option><option value="2">存在跨期/少计收入情况</option></select>
-    </div>
-    <div class="form-row"><label>视同销售收入是否已确认</label>
-      <select id="f_视同销售"><option value="0">已全部确认</option><option value="1" selected>部分已确认</option><option value="2">未确认</option></select>
-    </div>
-    <div class="form-row"><label>不征税收入处理是否正确</label>
-      <select id="f_不征税"><option value="0">正确区分</option><option value="1" selected>基本正确</option><option value="2">不确定</option></select>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">💰 税前扣除检查</div>
-    <div class="form-row"><label>业务招待费是否超限额</label>
-      <select id="f_招待费"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额未调整</option></select>
-    </div>
-    <div class="form-row"><label>广告宣传费是否超限额</label>
-      <select id="f_广告费"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额未调整</option></select>
-    </div>
-    <div class="form-row"><label>公益性捐赠是否超限额</label>
-      <select id="f_捐赠"><option value="0">未超限额</option><option value="1" selected>接近限额</option><option value="2">已超限额</option></select>
-    </div>
-    <div class="form-row"><label>工资薪金与福利费扣除合规</label>
-      <select id="f_工资"><option value="0">完全合规</option><option value="1" selected>基本合规</option><option value="2">存在不合规情况</option></select>
-    </div>
-    <div class="form-row"><label>资产折旧摊销处理正确</label>
-      <select id="f_折旧"><option value="0">正确</option><option value="1" selected>基本正确</option><option value="2">存在问题</option></select>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">🎯 优惠适用检查</div>
-    <div class="form-row"><label>研发费用加计扣除是否已享受</label>
-      <select id="f_研发加计"><option value="0">已享受，金额正确</option><option value="1" selected>已享受，金额待确认</option><option value="2">未享受（有研发活动但未申报）</option></select>
-    </div>
-    <div class="form-row"><label>小微企业/高新优惠税率是否正确适用</label>
-      <select id="f_优惠税率"><option value="0">正确适用</option><option value="1" selected>基本适用</option><option value="2">未适用或适用错误</option></select>
-    </div>
-    <div class="form-row"><label>免税收入（国债利息等）是否已申报</label>
-      <select id="f_免税收入"><option value="0">已正确申报</option><option value="1" selected>已申报但金额待核实</option><option value="2">未申报</option></select>
-    </div>
-    <div class="form-row"><label>以前年度亏损是否已弥补</label>
-      <select id="f_亏损弥补"><option value="0">正确弥补</option><option value="1" selected>部分弥补</option><option value="2">未弥补/超期</option></select>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📋 申报合规</div>
-    <div class="form-row"><label>纳税调整项目是否完整</label>
-      <select id="f_纳税调整"><option value="0">完整调整</option><option value="1" selected">大部分已调整</option><option value="2">漏调整</option></select>
-    </div>
-    <div class="form-row"><label>关联交易是否已申报</label>
-      <select id="f_关联交易"><option value="0">已申报，合规</option><option value="1" selected">有关联交易但未申报</option><option value="2">不适用</option></select>
-    </div>
-    <div class="form-row"><label>汇算清缴是否已按期完成</label>
-      <select id="f_按期"><option value="0">已按期完成</option><option value="1" selected">正在进行中</option><option value="2">尚未开始</option></select>
-    </div>
-  </div>
-
-  <div class="fixed-bottom">
-    <button class="btn-secondary" onclick="resetAll()">清空</button>
-    <button class="btn-primary" onclick="calc()">📊 开始自检</button>
-  </div>
-</div>
-
-<div class="panel" id="p-report">
-  <div id="scoreCard" class="score-card">
-    <div class="label">汇算清缴合规评分</div>
-    <div class="score">—</div>
-    <div class="grade">请先在「填数据」页录入</div>
-    <div class="suggestion"></div>
-  </div>
-  <div id="dimGrid" class="dim-grid"></div>
-  <div class="card">
-    <div class="card-title">📋 逐项检查结果</div>
-    <div id="detailItems"></div>
-  </div>
-  <div class="fixed-bottom">
-    <button class="btn-secondary" onclick="st('input')">← 修改数据</button>
-    <button class="btn-primary" onclick="shareResult()">📤 分享</button>
-  </div>
-</div>
-
-<div class="panel" id="p-help">
-  <div class="help-card"><h3>📋 使用说明</h3>
-    <ol><li>填写企业基础信息和汇算情况</li><li>选择各检查项</li><li>查看合规评分及风险提示</li></ol>
-  </div>
-  <div class="help-card"><h3>📊 检查维度</h3>
-    <p><strong>收入确认</strong> — 及时入账、视同销售、不征税收入</p>
-    <p><strong>税前扣除</strong> — 招待费、广告费、捐赠、工资、折旧</p>
-    <p><strong>优惠适用</strong> — 研发加计、小微优惠、免税收入、亏损弥补</p>
-    <p><strong>申报合规</strong> — 纳税调整、关联交易、按期申报</p>
-  </div>
-  <div class="help-card"><h3>⚠️ 常见风险点</h3>
-    <ul>
-      <li>业务招待费超限未调整 → 补税+滞纳金</li>
-      <li>研发费用加计扣除未享受 → 多缴税款</li>
-      <li>关联交易未申报 → 转让定价风险</li>
-      <li>优惠税率适用错误 → 补税风险</li>
-    </ul>
-  </div>
-  <div class="help-card"><h3>👤 关于作者</h3>
-    <div class="contact">
-      <strong>洪淳宇 · 您身边的财税专家</strong>
-      <p>专注企业所得税汇算清缴、税务筹划、合规申报</p>
-      <p style="margin-top:6px;">📞 186-0129-4989 | 💬 hongchunyu042896</p>
-    </div>
-  </div>
-</div>
-
-<script>
-function gs(id){const el=document.getElementById("f_"+id);return el?parseInt(el.value)||0:0}
-function calc(){
-  const items={
-    "收入及时入账":gs("收入入账"),"视同销售确认":gs("视同销售"),"不征税收入处理":gs("不征税"),
-    "业务招待费":gs("招待费"),"广告宣传费":gs("广告费"),"公益性捐赠":gs("捐赠"),
-    "工资福利费":gs("工资"),"折旧摊销":gs("折旧"),
-    "研发加计扣除":gs("研发加计"),"优惠税率":gs("优惠税率"),"免税收入":gs("免税收入"),"亏损弥补":gs("亏损弥补"),
-    "纳税调整":gs("纳税调整"),"关联交易":gs("关联交易"),"按期申报":gs("按期")
-  };
-  const totalScore=Object.values(items).reduce((s,v)=>s+v,0);
-  const maxScore=Object.keys(items).length*2;
-  const rate=Math.round((maxScore-totalScore)/maxScore*100);
-
-  let grade,suggestion;
-  if(rate>=85){grade="🟢 合规状况良好";suggestion="🎉 汇算清缴准备工作充分，建议按期完成申报"}
-  else if(rate>=70){grade="🟡 基本合规";suggestion="📌 部分项目需关注，建议逐项排查纳税调整"}
-  else if(rate>=55){grade="🟠 存在风险";suggestion="⚠️ 汇算清缴存在风险，建议全面梳理纳税调整项"}
-  else{grade="🔴 风险较高";suggestion="🚨 汇算清缴风险较高，强烈建议专业会计师介入"}
-
-  document.getElementById("scoreCard").innerHTML=
-    `<div class="label">汇算清缴合规评分</div><div class="score">${maxScore-totalScore}/${maxScore}</div><div class="grade">${grade}</div><div class="suggestion">${suggestion}</div>`;
-
-  const dims={
-    "收入确认":{s:gs("收入入账")+gs("视同销售")+gs("不征税"),m:6},
-    "税前扣除":{s:gs("招待费")+gs("广告费")+gs("捐赠")+gs("工资")+gs("折旧"),m:10},
-    "优惠适用":{s:gs("研发加计")+gs("优惠税率")+gs("免税收入")+gs("亏损弥补"),m:8},
-    "申报合规":{s:gs("纳税调整")+gs("关联交易")+gs("按期"),m:6}
-  };
-
-  document.getElementById("dimGrid").innerHTML=Object.entries(dims).map(([k,v])=>{
-    const p=Math.round((v.m-v.s)/v.m*100);
-    let c="#16a34a",cl="pass";
-    if(p<60){c="#dc2626";cl="danger"}else if(p<80){c="#d97706";cl="warn"}
-    return `<div class="dim-card"><div class="name">${k}</div><div class="dscore" style="color:${c}">${v.m-v.s}/${v.m}</div><div class="dstatus ${cl}">${p}%</div></div>`;
-  }).join("");
-
-  const labels={
-    "收入及时入账":["全部及时","大部入账","存在跨期"],"视同销售确认":["全部确认","部分确认","未确认"],
-    "不征税收入处理":["正确区分","基本正确","不确定"],
-    "业务招待费":["未超限","接近限额","已超限"],"广告宣传费":["未超限","接近限额","已超限"],
-    "公益性捐赠":["未超限","接近限额","已超限"],"工资福利费":["完全合规","基本合规","不合规"],
-    "折旧摊销":["正确","基本正确","存在问题"],
-    "研发加计扣除":["已享受正确","已享受待确认","未享受"],"优惠税率":["正确适用","基本适用","未适用"],
-    "免税收入":["正确申报","待核实","未申报"],"亏损弥补":["正确弥补","部分弥补","未弥补"],
-    "纳税调整":["完整调整","大部调整","漏调整"],"关联交易":["已申报合规","未申报","不适用"],
-    "按期申报":["已按期","进行中","尚未开始"]
-  };
-  const itemKeys=Object.keys(items);
-  document.getElementById("detailItems").innerHTML=itemKeys.map(k=>{
-    const v=items[k];
-    const s=v===0?"✅":v===1?"⚠️":"❌";
-    const c=v===0?"#16a34a":v===1?"#d97706":"#dc2626";
-    return `<div style="display:flex;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #f0f0f0;font-size:13px;align-items:center">
-      <span>${k}</span><span style="color:#666">${labels[k]?labels[k][v]:''}</span><span style="color:${c};font-weight:600">${s}</span>
-    </div>`;
-  }).join("");
-  st("report");
-}
-function st(n){document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===n));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id==="p-"+n));window.scrollTo(0,0)}
-function resetAll(){if(!confirm("清空数据？"))return;document.querySelectorAll("#p-input select").forEach(e=>e.selectedIndex=0);document.querySelectorAll("#p-input input").forEach(e=>e.value="")}
-function shareResult(){alert("📱 截屏保存即可分享给客户！")}
-
-function downloadPDF(){
-  window.print();
-}
-</script>
-
-
-    </body>
-</html>
+</body>
+   340|</html>
+   341|
